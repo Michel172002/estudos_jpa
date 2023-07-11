@@ -33,4 +33,11 @@ public class CategoryDao {
         String jpql = "SELECT c FROM Category c";
         return em.createQuery(jpql).getResultList();
     }
+
+    public List<Category> findByName(String name){
+        String jpql = "SELECT c FROM Category c WHERE c.name = ?1";
+        return em.createQuery(jpql)
+                .setParameter(1, name)
+                .getResultList();
+    }
 }

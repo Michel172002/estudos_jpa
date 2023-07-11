@@ -3,6 +3,7 @@ package org.example.dao;
 import org.example.model.Product;
 
 import javax.persistence.EntityManager;
+import java.math.BigDecimal;
 import java.util.List;
 
 public class ProductDao {
@@ -32,5 +33,26 @@ public class ProductDao {
     public List<Product> findAll(){
         String jpql = "SELECT p FROM Product";
         return em.createQuery(jpql).getResultList();
+    }
+
+    public List<Product> findByName(String name){
+        String jpql = "SELECT p FROM Product p WHERE p.name = ?1";
+        return em.createQuery(jpql)
+                .setParameter(1, name)
+                .getResultList();
+    }
+
+    public List<Product> findByCategoryName(String name){
+        String jpql = "SELECT p FROM Product p WHERE p.category.name = ?1";
+        return em.createQuery(jpql)
+                .setParameter(1, name)
+                .getResultList();
+    }
+
+    public BigDecimal findPriceProductById(Long id){
+        String jpql = "SELECT p.price FROM Product p WHERE p.id = ?1";
+        return em.createQuery(jpql, BigDecimal.class)
+                .setParameter(1, id)
+                .getSingleResult();
     }
 }
