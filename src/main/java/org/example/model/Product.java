@@ -2,6 +2,7 @@ package org.example.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "products")
@@ -12,6 +13,16 @@ public class Product {
     private String name;
     private String description;
     private BigDecimal price;
+    private LocalDate dateRegister = LocalDate.now();
+    @Enumerated(EnumType.STRING)
+    private Category category;
+
+    public Product(String name, String description, BigDecimal price, Category category) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+    }
 
     public Long getId() {
         return id;
