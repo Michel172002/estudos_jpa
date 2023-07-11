@@ -12,6 +12,10 @@ public class CategoryDao {
     }
 
     public void register(Category category){
-        em.persist(category);
+        this.em.persist(category);
+    }
+
+    public void update(Category category){
+        this.em.merge(category);
     }
 }
